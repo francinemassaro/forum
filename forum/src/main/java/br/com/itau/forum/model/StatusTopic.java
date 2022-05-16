@@ -1,6 +1,6 @@
 package br.com.itau.forum.model;
 
-public enum StatusTopico {
+public enum StatusTopic {
 	
 	NAO_RESPONDIDO,
 	NAO_SOLUCIONADO,
