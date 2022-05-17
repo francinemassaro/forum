@@ -20,11 +20,11 @@ public class TopicDto {
         this.creationDate = topico.getCreationDate();
     }
 
-    public Topic converter(){
+    public Topic convert(){
         return new Topic();
     }
 
-    public static List<TopicDto> converter(List<Topic> topicos){
+    public static List<TopicDto> convert(List<Topic> topicos){
         return topicos.stream().map(TopicDto::new).collect(Collectors.toList());
     }
 

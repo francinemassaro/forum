@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TopicRepository extends JpaRepository<Topic, Long> {
 
-    List<Topic> findByCourseNameIgnoreCase(String nomeCurso);
+    List<Topic> findByCourseNameIgnoreCase(String nameCourse);
 }

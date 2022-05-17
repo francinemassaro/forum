@@ -13,7 +13,7 @@ public class Topic {
 	private String message;
 	private LocalDateTime creationDate = LocalDateTime.now();
 	@Enumerated(EnumType.STRING)
-	private StatusTopic status = StatusTopic.NAO_RESPONDIDO;
+	private StatusTopic status = StatusTopic.NOT_ANSWERED;
 	@ManyToOne
 	private User user;
 	@ManyToOne
