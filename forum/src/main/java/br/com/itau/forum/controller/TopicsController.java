@@ -1,5 +1,6 @@
 package br.com.itau.forum.controller;
 
+import javax.validation.Valid;
 import br.com.itau.forum.controller.dto.TopicDto;
 import br.com.itau.forum.controller.form.TopicForm;
 import br.com.itau.forum.model.Topic;
@@ -12,7 +13,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-
 
 @RestController
 @RequestMapping(value = "/topics")
@@ -38,12 +38,11 @@ public class TopicsController {
 
     @PostMapping
     @RequestMapping("/register")
-    public ResponseEntity<TopicDto> register(@RequestBody TopicForm form, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<TopicDto> register(@RequestBody @Valid TopicForm form, UriComponentsBuilder uriBuilder) {
         Topic topic = form.convert(courseRepository);
         topicRepository.save(topic);
 
         URI uri = uriBuilder.path("/topics/{id}").buildAndExpand(topic.getId()).toUri();
         return ResponseEntity.created(uri).body(new TopicDto(topic));
     }
-
 }
