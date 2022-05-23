@@ -103,20 +103,19 @@ public class Topic {
 		this.user = user;
 	}
 
-	public Course getCurso() {
+	public Course getCourse() {
 		return course;
 	}
 
-	public void setCurso(Course course) {
+	public void setCourse(Course course) {
 		this.course = course;
 	}
 
-	public List<Answer> getRespostas() {
+	public List<Answer> getAnswers() {
 		return answers;
 	}
 
-	public void setRespostas(List<Answer> answers) {
+	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
 	}
-
 }

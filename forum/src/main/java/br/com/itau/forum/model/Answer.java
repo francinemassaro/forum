@@ -56,12 +56,12 @@ public class Answer {
 		this.message = message;
 	}
 
-	public Topic getTopico() {
+	public Topic getTopic() {
 		return topic;
 	}
 
-	public void setTopico(Topic topico) {
-		this.topic = topico;
+	public void setTopic(Topic topic) {
+		this.topic = topic;
 	}
 
 	public LocalDateTime getCreationDate() {
