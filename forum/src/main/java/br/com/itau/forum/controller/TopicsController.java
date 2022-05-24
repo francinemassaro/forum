@@ -8,6 +8,11 @@ import br.com.itau.forum.model.Topic;
 import br.com.itau.forum.repository.CourseRepository;
 import br.com.itau.forum.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -29,13 +34,16 @@ public class TopicsController {
     private CourseRepository courseRepository;
 
     @GetMapping
-    public List<TopicDto> list(String courseName) {
+    public Page<TopicDto> list(
+            @RequestParam(required = false) String courseName,
+            @PageableDefault(sort = "id", direction = Sort.Direction.DESC, page = 0, size = 10) Pageable pageable) {
+
         if (courseName == null) {
-            List<Topic> topics = topicRepository.findAll();
+            Page<Topic> topics = topicRepository.findAll(pageable);
             return TopicDto.convert(topics);
 
         } else {
-            List<Topic> topics = topicRepository.findByCourseNameIgnoreCase(courseName);
+            Page<Topic> topics = topicRepository.findByCourseNameIgnoreCase(courseName, pageable);
             return TopicDto.convert(topics);
         }
     }
@@ -43,7 +51,7 @@ public class TopicsController {
     @GetMapping("/{id}")
     public ResponseEntity<DetailTopicDto> detailTopic(@PathVariable Long id) {
         Optional<Topic> topic = topicRepository.findById(id);
-        if (topic.isPresent()){
+        if (topic.isPresent()) {
             return ResponseEntity.ok(new DetailTopicDto(topic.get()));
         }
         return ResponseEntity.notFound().build();
@@ -68,7 +76,7 @@ public class TopicsController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id){
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         topicRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }

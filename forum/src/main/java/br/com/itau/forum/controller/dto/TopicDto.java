@@ -1,6 +1,7 @@
 package br.com.itau.forum.controller.dto;
 
 import br.com.itau.forum.model.Topic;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,8 +25,8 @@ public class TopicDto {
         return new Topic();
     }
 
-    public static List<TopicDto> convert(List<Topic> topicos){
-        return topicos.stream().map(TopicDto::new).collect(Collectors.toList());
+    public static Page<TopicDto> convert(Page<Topic> topics){
+        return topics.map(TopicDto::new);
     }
 
     public Long getId() {
